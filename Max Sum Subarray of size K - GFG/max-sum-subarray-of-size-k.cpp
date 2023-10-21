@@ -10,7 +10,7 @@ public:
         long sum=0;
         int i=0,j=0;
         
-        while(j<N && i<(N-K+1)){
+        while(j<N){
             while(j-i+1<=K){
                 sum+=Arr[j];
                 j++;
