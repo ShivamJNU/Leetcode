@@ -8,52 +8,78 @@ using namespace std;
 //User function template for C++
 class Solution{
 public:
-	int search(string pat, string txt) {
-    map<char, int> mp;
-    
-    for (auto e : pat) {
-        mp[e]++;
-    }
-    
-    int dist_elements = mp.size();
-    int ans = 0;
-    
-    int i = 0;
-    int j = 0;
-    
-    while (j < txt.size()) {
-        if (mp.find(txt[j]) != mp.end()) {
+    int search(string pat, string txt) {
+        
+        map<char, int> mp;
+        
+        for (auto e : pat) {
+            mp[e]++;
+        }
+        
+        int dist_elements = mp.size();
+        int ans = 0;
+        
+        for (int j = 0; j < pat.length()-1; j++) { 
+
+            if(mp.find(txt[j])!=mp.end()){
+               
+                mp[txt[j]]--;
+                if (mp[txt[j]] == 0) {
+                    dist_elements--;
+                    
+                }
+            
+                
+            }
+            
+        }
+        
+        int i = 0;
+        //int j=0;
+        int j = pat.length() - 1;
+        
+        while (j < txt.length()) {
+            
+            
+            
+            if(mp.find(txt[j])!=mp.end()){
+                
+                
                 mp[txt[j]]--;
                 if (mp[txt[j]] == 0) {
                     dist_elements--;
                 }
             
-        }
-        
-        if (j - i + 1 == pat.size()) {
-            if (dist_elements == 0) {
+                
+            }
+
+            if(j-i+1<pat.length()){
+                j++;
+            }else{
+                if(dist_elements==0){
                 ans++;
             }
 
-            if (mp.find(txt[i]) != mp.end()) {
+            if(mp.find(txt[i])!=mp.end()){
                 mp[txt[i]]++;
-                if (mp[txt[i]] == 1) {
+                if(mp[txt[i]]==1){
                     dist_elements++;
                 }
+                
             }
-
+            
             i++;
             j++;
-        }else{
-            j++;
+
+            }
+            
         }
+        
+        return ans;
     }
-    
-    return ans;
-}
-
-
 };
+
+
 
 //{ Driver Code Starts.
 
