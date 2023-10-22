@@ -53,9 +53,7 @@ public:
                 
             }
 
-            if(j-i+1<pat.length()){
-                j++;
-            }else{
+            
                 if(dist_elements==0){
                 ans++;
             }
@@ -71,7 +69,7 @@ public:
             i++;
             j++;
 
-            }
+            
             
         }
         
