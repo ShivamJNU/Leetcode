@@ -23,6 +23,8 @@ public:
                 char second='a'+j;
                 
                 if(m1.find(first)!= m1.end() && m2.find(second)!=m2.end()){
+                //if(m1[first]!=0 && m2[second]!=0)--> Will not work here.
+                    
                     // int first_size=m1.size();
                     // int second_size=m2.size();
                     m1[second]++;
