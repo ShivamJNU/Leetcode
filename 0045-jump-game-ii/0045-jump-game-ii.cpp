@@ -51,6 +51,7 @@ public:
         
         if (nums[index] == 0) {
             return DP[index] = INT_MAX-10;
+            // To avoid using (INT_MAX - 10), use long long data type everywhere.
         }
         
         int mini=INT_MAX-10;
