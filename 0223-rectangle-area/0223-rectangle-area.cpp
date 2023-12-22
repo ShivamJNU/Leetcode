@@ -1,4 +1,6 @@
-class Solution {
+//The bolow solution is working perfectly fine:
+
+/*class Solution {
 public:
     int computeArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
         int area1 = abs((ax2-ax1)*(ay2-ay1));
@@ -38,23 +40,36 @@ public:
         return area1 + area2 - (overlapping_x*overlapping_y);
     }
 };
+*/
 
+// This code is also running fine now after debugging:
 
-/*
-if(bx1>=ax1 && bx1<=ax2){
+class Solution {
+public:
+    int computeArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int area1 = abs((ax2-ax1)*(ay2-ay1));
+        int area2 = abs((bx2-bx1)*(by2-by1));
+
+        int overlapping_x = 0;
+        int overlapping_y = 0;
+
+        if(bx1>=ax1 && bx1<=ax2){
             if(bx2>ax2){
                 overlapping_x = abs(ax2-bx1);
             }else{
                 overlapping_x = abs(bx2-bx1);
             }
-        }
-
-        if(bx2>=ax1 && bx2<=ax2){
+        }else if(bx2>=ax1 && bx2<=ax2){
             if(bx1<ax1){
                 overlapping_x = abs(ax1-bx2);
             }else{
                 overlapping_x = abs(bx2-bx1);
             }
+        }
+
+// This case was being left before debugging:
+        if(bx1<=ax1 && bx2>=ax2){
+            overlapping_x = abs(ax1-ax2);
         }
 
         if(by1>=ay1 && by1<=ay2){
@@ -63,13 +78,20 @@ if(bx1>=ax1 && bx1<=ax2){
             }else{
                 overlapping_y = abs(by2-by1);
             }
-        }
-
-        if(by2>=ay1 && by2<=ay2){
+        }else if(by2>=ay1 && by2<=ay2){
             if(by1<ay1){
                 overlapping_y = abs(ay1-by2);
             }else{
                 overlapping_y = abs(by2-by1);
             }
         }
-        */
+        
+// This case was being left before debugging:
+        if(by1<=ay1 && by2>=ay2){
+            overlapping_y = abs(ay1-ay2);
+        }
+
+        return area1 + area2 - (overlapping_x*overlapping_y);
+    }
+};
+        
