@@ -17,7 +17,7 @@ public:
             
         }
         
-        if(vec1.size()==0 || vec1.size()==1){
+        if(vec1.size()==0){
             return 0;
         }
         
