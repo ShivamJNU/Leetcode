@@ -6,7 +6,7 @@ public:
         int mask = 0;
 
         for(int i=30; i>=0; i--){
-            mask = mask | (1<<i); //mask stores how many bits has been set
+            mask = mask + (1<<i); //mask stores how many bits has been set
 
             int consecAnd = mask;
             int cnt = 0;
@@ -22,7 +22,7 @@ public:
             }
 
             if(cnt>k){
-                ans|=(1<<i);
+                ans+=(1<<i);
             }
         }
 
