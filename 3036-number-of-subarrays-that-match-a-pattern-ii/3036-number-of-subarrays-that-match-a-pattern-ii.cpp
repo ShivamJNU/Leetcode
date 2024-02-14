@@ -149,18 +149,18 @@
 
 class Solution {
 public:
-    
-    int Glob = 0;
-    
-    void computeLPSArray(vector<int> &pat, int M, vector<int> &lps)
+// The below code is the edited version of the KMP Algorithm's code available on the GeeksForGeeks Website.
+
+vector<int> Glob;
+
+void computeLPSArray(vector<int> &pat, int M, vector<int> &lps)
 {
-    // length of the previous longest prefix suffix
     int len = 0;
 
-    lps[0] = 0; // lps[0] is always 0
+    lps[0] = 0;
 
-    // the loop calculates lps[i] for i = 1 to M-1
     int i = 1;
+
     while (i < M)
     {
         if (pat[i] == pat[len])
@@ -169,19 +169,13 @@ public:
             lps[i] = len;
             i++;
         }
-        else // (pat[i] != pat[len])
+        else
         {
-            // This is tricky. Consider the example.
-            // AAACAAAA and i = 7. The idea is similar
-            // to search step.
             if (len != 0)
             {
                 len = lps[len - 1];
-
-                // Also, note that we do not increment
-                // i here
             }
-            else // if (len == 0)
+            else
             {
                 lps[i] = 0;
                 i++;
@@ -192,21 +186,16 @@ public:
 
 void KMPSearch(vector<int> &pat, vector<int> &txt)
 {
-    // int M = strlen(pat);
-    // int N = strlen(txt);
 
     int M = pat.size();
     int N = txt.size();
 
-    // create lps[] that will hold the longest prefix suffix
-    // values for pattern
     vector<int> lps(M);
 
-    // Preprocess the pattern (calculate lps[] array)
     computeLPSArray(pat, M, lps);
 
-    int i = 0; // index for txt[]
-    int j = 0; // index for pat[]
+    int i = 0;
+    int j = 0;
     while ((N - i) >= (M - j))
     {
         if (pat[j] == txt[i])
@@ -217,20 +206,23 @@ void KMPSearch(vector<int> &pat, vector<int> &txt)
 
         if (j == M)
         {
-            // cout<<"Found pattern at index "<< i - j<<endl;
-            Glob++;
+            // cout << "Found pattern at index " << i - j << endl;
+
+            Glob.push_back((i - j));
+
             j = lps[j - 1];
         }
 
-        // mismatch after j matches
         else if (i < N && pat[j] != txt[i])
         {
-            // Do not match lps[0..lps[j-1]] characters,
-            // they will match anyway
             if (j != 0)
+            {
                 j = lps[j - 1];
+            }
             else
+            {
                 i = i + 1;
+            }
         }
     }
 }
@@ -250,7 +242,7 @@ void KMPSearch(vector<int> &pat, vector<int> &txt)
         
         KMPSearch(pattern, vec1);
         
-        return Glob;
+        return Glob.size();
     }
 };
 
