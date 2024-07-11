@@ -35,7 +35,10 @@ public:
         
         while(true){
             if(st.empty()){
-                        // st.pop();
+                break;
+            }
+            if(st.top()=='('){
+                        st.pop();
                         break;
                     }else{
                         ans.push_back(st.top());
